@@ -16,7 +16,8 @@
   "files": [
     "./assets/app/app.component.ts",
     "./assets/app/boot.ts",
-    "./assets/app/message.ts"
+    "./assets/app/message.ts",
+    "./assets/app/user.ts"
   ],
   "exclude": [
     "node_modules"
