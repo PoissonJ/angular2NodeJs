@@ -10,8 +10,13 @@
     "noImplicitAny": false,
     "outDir": "../public/js/app"
   },
+  "filesGlob": [
+    "./assets/app/*.ts"
+  ],
   "files": [
-    "./assets/app/boot.ts"
+    "./assets/app/app.component.ts",
+    "./assets/app/boot.ts",
+    "./assets/app/message.ts"
   ],
   "exclude": [
     "node_modules"
