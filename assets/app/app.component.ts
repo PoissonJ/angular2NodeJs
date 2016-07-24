@@ -9,5 +9,8 @@ import { Message } from './messages/message';
   directives: [MessageComponent]
 })
 export class AppComponent {
-  message: Message = new Message('A new message', null, 'Jonathan');
+  messages: Message[] = [
+    new Message('A new message', null, 'Jonathan'),
+    new Message('Another message', null, 'Justin')
+  ];
 }
