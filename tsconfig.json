@@ -18,6 +18,7 @@
     "./assets/app/app.component.ts",
     "./assets/app/boot.ts",
     "./assets/app/auth/user.ts",
+    "./assets/app/messages/message.component.ts",
     "./assets/app/messages/message.ts"
   ],
   "exclude": [
