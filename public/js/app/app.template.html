@@ -1,7 +1,6 @@
-<div class="row">
+<div class="row spacing">
+  <my-message-input></my-message-input>
 </div>
-<div class="row">
-  <section class="col-md-8 col-md-offset-2">
-    <my-message [message]="message" (editClicked)="message.content = $event" *ngFor="let message of messages"></my-message>
-  </section>
+<div class="row spacing">
+  <my-message-list></my-message-list>
 </div>

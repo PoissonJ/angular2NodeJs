@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { MessageComponent } from './messages/message.component';
-import { Message } from './messages/message';
+import { MessageListComponent } from './messages/message-list.component';
+import { MessageInputComponent } from './messages/message-input.component';
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
   templateUrl: 'app.template.html',
-  directives: [MessageComponent]
+  directives: [MessageListComponent, MessageInputComponent]
 })
 export class AppComponent {
-  messages: Message[] = [
-    new Message('A new message', null, 'Jonathan'),
-    new Message('Another message', null, 'Justin')
-  ];
 }
