@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {Message} from "./message";
 
 @Component({
@@ -19,10 +19,7 @@ import {Message} from "./message";
       width: 19%;
     }
   `]
-  // template: `
-
 })
 export class MessageComponent {
-  message: Message = new Message('The content', null, 'Max');
-
+  @Input() message: Message;
 }
