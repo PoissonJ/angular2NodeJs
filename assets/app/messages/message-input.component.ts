@@ -5,8 +5,7 @@ import { MessageService } from './message.service';
 @Component({
   moduleId: module.id,
   selector: 'my-message-input',
-  templateUrl: 'messageInput.html',
-  providers: [MessageService]// List of injections
+  templateUrl: 'messageInput.html'
 })
 export class MessageInputComponent {
 
