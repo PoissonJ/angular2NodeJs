@@ -12,8 +12,8 @@ export class MessageInputComponent {
   // Get instance of mesage service
   constructor(private _messageService: MessageService) { }
 
-  onCreate(content: string) {
-    const message: Message = new Message(content, null, 'Dummy');
+  onSubmit(form: any) {
+    const message: Message = new Message(form.content, null, 'Dummy');
     this._messageService.addMessage(message);
   }
 }
