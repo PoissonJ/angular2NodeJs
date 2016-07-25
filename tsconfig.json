@@ -21,6 +21,7 @@
     "./assets/app/messages/message-input.component.ts",
     "./assets/app/messages/message-list.component.ts",
     "./assets/app/messages/message.component.ts",
+    "./assets/app/messages/message.service.ts",
     "./assets/app/messages/message.ts"
   ],
   "exclude": [
