@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Routes, ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 import {SignupComponent} from "./signup.component";
 import {SigninComponent} from "./signin.component";
 import {LogoutComponent} from "./logout.component";
@@ -9,6 +9,7 @@ import {LogoutComponent} from "./logout.component";
   selector: 'my-auth',
   templateUrl: 'authenticationComponent.html',
   directives: [ROUTER_DIRECTIVES],
+  providers: [SignupComponent, SigninComponent, LogoutComponent],
   styles: [`
     .router-link-active {
       color: #555;
@@ -19,11 +20,6 @@ import {LogoutComponent} from "./logout.component";
     }
   `]
 })
-@Routes([
-  { path: '/signup', component: SignupComponent },
-  { path: '/signin', component: SigninComponent },
-  { path: '/logout', component: LogoutComponent }
-])
 export class AuthenticationComponent {
 
 }

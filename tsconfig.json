@@ -16,8 +16,10 @@
   ],
   "files": [
     "./assets/app/app.component.ts",
+    "./assets/app/app.routes.ts",
     "./assets/app/boot.ts",
     "./assets/app/header.component.ts",
+    "./assets/app/auth/auth.routes.ts",
     "./assets/app/auth/auth.service.ts",
     "./assets/app/auth/authentication.component.ts",
     "./assets/app/auth/logout.component.ts",
