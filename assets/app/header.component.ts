@@ -20,7 +20,7 @@ import {ROUTER_DIRECTIVES} from "@angular/router";
             display: inline-block;
         }
 
-        .router-link-active {
+        .active {
             background-color: #337ab7;
             color: white;
         }

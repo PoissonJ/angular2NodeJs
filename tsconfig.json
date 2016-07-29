@@ -22,6 +22,7 @@
     "./assets/app/auth/auth.routes.ts",
     "./assets/app/auth/auth.service.ts",
     "./assets/app/auth/authentication.component.ts",
+    "./assets/app/auth/authenticationHome.component.ts",
     "./assets/app/auth/logout.component.ts",
     "./assets/app/auth/signin.component.ts",
     "./assets/app/auth/signup.component.ts",

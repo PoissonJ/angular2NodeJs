@@ -12,6 +12,6 @@ import { MessageService } from "./messages/message.service";
 // of the service
 bootstrap(AppComponent, [
   MessageService,
-  provideRouter(MessageAppRoutes)
+  provideRouter(MessageAppRoutes),
   provide(LocationStrategy, { useClass: HashLocationStrategy })
 ]);

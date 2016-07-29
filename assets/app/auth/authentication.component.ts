@@ -9,9 +9,9 @@ import {LogoutComponent} from "./logout.component";
   selector: 'my-auth',
   templateUrl: 'authenticationComponent.html',
   directives: [ROUTER_DIRECTIVES],
-  // providers: [SignupComponent, SigninComponent, LogoutComponent],
+  providers: [SignupComponent, SigninComponent, LogoutComponent],
   styles: [`
-    .router-link-active {
+    .active {
       color: #555;
       cursor: default;
       background-color: #fff;
