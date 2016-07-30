@@ -4,6 +4,7 @@ import { provide } from "@angular/core"
 import { provideRouter} from "@angular/router";
 import { LocationStrategy, HashLocationStrategy} from "@angular/common"
 import { disableDeprecatedForms, provideForms} from "@angular/forms"
+import { HTTP_PROVIDERS} from "@angular/http"
 
 import { AppComponent } from "./app.component";
 import { MessageAppRoutes } from "./app.routes";
@@ -16,5 +17,6 @@ bootstrap(AppComponent, [
   provideRouter(MessageAppRoutes),
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
   disableDeprecatedForms(),
-  provideForms()
+  provideForms(),
+  HTTP_PROVIDERS
 ]);
