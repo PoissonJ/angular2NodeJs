@@ -24,8 +24,8 @@ export class MessageInputComponent {
     const message: Message = new Message(model.content, null, 'Dummy');
     this._messageService.addMessage(message)
       .subscribe( // Check for returned data
-        data => console.log(JSON.stringify(data)),
-        error => console.log(error)
+        data => console.log(data.json()),
+        error => console.log(error.json())
       );
 
     this.model.content="";
