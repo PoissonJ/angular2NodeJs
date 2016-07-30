@@ -16,6 +16,12 @@ export class MessageListComponent implements OnInit {
   messages: Message[];
 
   ngOnInit() { // better for heavy tasks that in the constructor
-    this.messages = this._messageService.getMessages();
+    this._messageService.getMessages()
+      .subscribe(
+        messages => {
+          this.messages = messages; // Local message array
+          this._messageService.messages = messages; // Application message array
+        }
+      )
   }
 }

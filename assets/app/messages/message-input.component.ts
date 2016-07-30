@@ -24,8 +24,10 @@ export class MessageInputComponent {
     const message: Message = new Message(model.content, null, 'Dummy');
     this._messageService.addMessage(message)
       .subscribe( // Check for returned data
-        data => console.log(data.json()),
-        error => console.log(error.json())
+        data => {
+          this._messageService.messages.push(data); // Update angulars message service to stay in sync
+        },
+        error => console.log(JSON.stringify(error))
       );
 
     this.model.content="";
