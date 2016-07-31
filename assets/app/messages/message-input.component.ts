@@ -12,6 +12,7 @@ import { MessageService } from './message.service';
 export class MessageInputComponent implements OnInit {
 
   model: Message = new Message("");
+  originalTextBeforeEdit: string;
   public showCancelButton: boolean = false;
   // Reset the form with a new hero AND restore 'pristine' class state
   // by toggling 'active' flag which causes the form
@@ -48,6 +49,7 @@ export class MessageInputComponent implements OnInit {
   }
 
   onCancel() {
+    this.model.content = this.originalTextBeforeEdit;
     this.model = new Message("");
     this._resetForm();
   }
@@ -56,6 +58,7 @@ export class MessageInputComponent implements OnInit {
     this._messageService.messageIsEdit.subscribe(
       message => {
         this.model = message;
+        this.originalTextBeforeEdit = message.content;
         this.showCancelButton = true;
       }
     );
