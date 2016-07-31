@@ -51,7 +51,7 @@ router.patch('/:id', function(req, res, next) {
         error: {message: 'Message could not be found'}
       });
     }
-    
+
     // success finding mesage
     doc.content = req.body.content;
     doc.save( function (err, result) {
@@ -63,6 +63,38 @@ router.patch('/:id', function(req, res, next) {
       }
       res.status(200).json({
         message: 'Success',
+        obj: result
+      })
+    });
+  });
+})
+
+router.delete('/:id', function(req, res,next){
+  Message.findById(req.params.id, function(err, doc) {
+    if (err) {
+      return res.status(404).json({ // need to return to stop execution
+        title: 'An error occurred',
+        error: err // contains a message inside of the err object
+      });
+    }
+    if (!doc) { // No message found from given id
+      return res.status(404).json({ // need to return to stop execution
+        title: 'No Message found',
+        error: {message: 'Message could not be found'}
+      });
+    }
+
+    // success finding mesage
+    doc.content = req.body.content;
+    doc.remove( function (err, result) {
+      if (err) { // Mongoose is smart enough to know to update the already existing object
+        return res.status(404).json({ // need to return to stop execution
+          title: 'An error occurred',
+          error: err // contains a message inside of the err object
+        });
+      }
+      res.status(200).json({
+        message: 'Successfully deleted',
         obj: result
       })
     });

@@ -32,7 +32,11 @@ export class MessageComponent {
   }
 
   onDelete() {
-    this._messageService.deleteMessage(this.message); // Each message has its own component
+    this._messageService.deleteMessage(this.message) // Each message has its own component
+      .subscribe(
+        data => console.log(data),
+        error => console.log(error)
+      );
   }
 
 }
