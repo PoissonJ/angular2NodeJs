@@ -15,9 +15,28 @@
 
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
+    <style media="screen">
+      .center-div
+        {
+          position: absolute;
+          margin: auto;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100px;
+          height: 100px;
+          /*background-color: #ccc;*/
+          /*border-radius: 3px;*/
+        }
+    </style>
 </head>
 <body>
-<my-app>Loading...</my-app>
+<my-app>
+    <div class="text-center">
+      <img src="images/box.gif"/>
+    </div>
+</my-app>
 
 <script>
     System.import('app').catch(function(err){ console.error(err);  });
