@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import 'rxjs/Rx'; // .map()
 import {Observable} from "rxjs/Observable";
@@ -7,6 +7,7 @@ import {Message} from "./message";
 @Injectable() // Does nothing except allow us to inject the HTTP service
 export class MessageService {
   public messages: Message[] = [];
+  public messageIsEdit = new EventEmitter<Message>();
 
   constructor(private _http: Http) {}
 
@@ -40,9 +41,10 @@ export class MessageService {
   }
 
   editMessage(message: Message) {
-    this.messages[this.messages.indexOf(message)] = new Message(
-      'Edited', null, 'Dummy'
-    );
+    this.messageIsEdit.emit(message);
+    // this.messages[this.messages.indexOf(message)] = new Message(
+    //   'Edited', null, 'Dummy'
+    // );
   }
 
   deleteMessage(message: Message) {

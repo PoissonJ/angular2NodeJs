@@ -3,8 +3,9 @@
     <div class="form-group">
       <label for="content">Content</label>
       <input type="text" class="form-control" id="content" name="content"
-       [(ngModel)]="model.content" required #content="ngModel">
+        [(ngModel)]="model.content" required #content="ngModel">
     </div>
-    <button  type="submit" class="btn btn-primary">Send Message</button>
+    <button  type="submit" class="btn btn-primary">{{ model == null ? 'Send Message': 'Save Message' }}</button>
+    <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="showCancelButton">Cancel</button>
   </form>
 </section>
