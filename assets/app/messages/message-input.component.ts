@@ -21,15 +21,19 @@ export class MessageInputComponent implements OnInit {
   // Get instance of mesage service
   constructor(private _messageService: MessageService) { }
 
-  onSubmit(model: Message) {
+  onSubmit() {
     if (this.showCancelButton) { // Edit a message
       // Edit
-      // this.model.content = model.content; // Update front end for better experience
+      this._messageService.updateMessage(this.model)
+        .subscribe(
+          data => console.log(data),
+          error => console.log(error)
+        );
+
       this.model = new Message("");
-      this.showCancelButton = false;
       this._resetForm();
     } else { // New message
-      const message: Message = new Message(model.content, null, 'Dummy');
+      const message: Message = new Message(this.model.content, null, 'Dummy');
       this._messageService.addMessage(message)
         .subscribe( // Check for returned data
           data => {
@@ -45,6 +49,7 @@ export class MessageInputComponent implements OnInit {
 
   onCancel() {
     this.model = new Message("");
+    this._resetForm();
   }
 
   ngOnInit() {
@@ -57,6 +62,7 @@ export class MessageInputComponent implements OnInit {
   }
 
   private _resetForm() {
+    this.showCancelButton = false;
     this.active = false;
     setTimeout(() => this.active = true, 0);
   }
