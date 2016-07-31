@@ -1,5 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
+
+import { User } from "./user";
+import { AuthService } from "./auth.service";
 @Component({
   moduleId: module.id, // necessary when using tsconfig "commonjs" for file path resolution
   selector: 'my-signup',
@@ -9,10 +12,22 @@ import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormContro
 export class SignupComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService) { }
 
   onSubmit() {
-    console.log(this.myForm.value);
+    console.log(JSON.stringify(this.myForm.value));
+    const user = new User(
+      this.myForm.value.email,
+      this.myForm.value.password,
+      this.myForm.value.firstName,
+      this.myForm.value.lastName
+    );
+
+    this._authService.signup(user)
+      .subscribe(
+        data => console.log(data), // remove for production
+        error => console.error(error)
+      )
   }
 
   ngOnInit() {

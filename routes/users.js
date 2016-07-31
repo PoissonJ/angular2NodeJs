@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var passwordHash = require('pashword-hash');
+var passwordHash = require('password-hash');
 
-var Message = require('../models/user');
+var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
+  console.log(req.body);
   var user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,

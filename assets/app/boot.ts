@@ -9,11 +9,13 @@ import { HTTP_PROVIDERS} from "@angular/http"
 import { AppComponent } from "./app.component";
 import { MessageAppRoutes } from "./app.routes";
 import { MessageService } from "./messages/message.service";
+import { AuthService } from "./auth/auth.service";
 
 // Added message service so each component shares a single instance
 // of the service
 bootstrap(AppComponent, [
   MessageService,
+  AuthService,
   provideRouter(MessageAppRoutes),
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
   disableDeprecatedForms(),
