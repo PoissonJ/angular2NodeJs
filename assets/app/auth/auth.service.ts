@@ -23,4 +23,9 @@ export class AuthService {
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()))
   }
+
+  // No need to reach out to server because it already gave us the token
+  logout() {
+    localStorage.clear();
+  }
 }

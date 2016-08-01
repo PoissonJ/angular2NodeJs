@@ -1,4 +1,7 @@
 import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+
+import {AuthService} from "./auth.service"
 @Component({
   moduleId: module.id, // necessary when using tsconfig "commonjs" for file path resolution
   selector: 'my-logout',
@@ -9,7 +12,11 @@ import {Component} from "@angular/core";
   `
 })
 export class LogoutComponent {
-  onLogout() {
 
+  constructor(private _authService: AuthService, private _router: Router){}
+
+  onLogout() {
+    this._authService.logout();
+    this._router.navigate(['/auth/signin']);
   }
 }
