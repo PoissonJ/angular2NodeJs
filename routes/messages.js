@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 var Message = require('../models/message');
 
@@ -18,6 +19,19 @@ router.get('/', function(req, res, next) {
       });
     });
 });
+
+// Middleware on request running top to buttom
+router.use('/', function(req, res, next) {
+  jwt.verify(req.query.token, 'secret', function(err, decoded) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Authentication failed',
+        error: err
+      });
+    }
+    next(); // Continue to next routes with the knowledge the user is signed in
+  });
+})
 
 router.post('/', function(req, res, next) {
   var message = new Message({
