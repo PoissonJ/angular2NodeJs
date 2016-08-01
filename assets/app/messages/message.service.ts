@@ -21,7 +21,7 @@ export class MessageService {
       .map(response => {
         // transform into a message of our custom message component
         const data = response.json().obj;
-        let message = new Message(data.content, data._id, 'Dummy', null);
+        let message = new Message(data.content, data._id, data.user.firstName, data.user._id);
         return message;
       })
       .catch(error => Observable.throw(error.json()));
@@ -34,7 +34,7 @@ export class MessageService {
         const data = response.json().obj;
         let objs: any[] = [];
         for (let i = 0; i < data.length; i++) {
-          let message = new Message(data[i].content, data[i]._id, 'Dummy', null);
+          let message = new Message(data[i].content, data[i]._id, data[i].user.firstName, data[i].user._id);
           objs.push(message);
         };
         return objs;

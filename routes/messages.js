@@ -7,6 +7,8 @@ var User = require('../models/user');
 
 router.get('/', function(req, res, next) {
   Message.find()
+    // Add user object
+    .populate('user', 'firstname') // Only retrieve the users first name
     .exec(function(err, docs) {// Dont execure the find query immediatlet, instead exec all queries
       if (err) {
         return res.status(404).json({
@@ -39,7 +41,7 @@ router.post('/', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
   User.findById(decoded.user._id, function(err, doc) {
     if (err) {
-      return res.status(404).json({ // need to return to stop execution
+      return res.status(401).json({ // need to return to stop execution
         title: 'An error occurred',
         error: err // contains a message inside of the err object
       });
@@ -70,6 +72,9 @@ router.post('/', function(req, res, next) {
 });
 
 router.patch('/:id', function(req, res, next) {
+  // Find user from payload
+  var decoded = jwt.decode(req.query.token);
+
   Message.findById(req.params.id, function(err, doc) {
     if (err) {
       return res.status(404).json({ // need to return to stop execution
@@ -85,6 +90,12 @@ router.patch('/:id', function(req, res, next) {
     }
 
     // success finding mesage
+    if (doc.user != decoded.user._id) { // doc.user is just the id
+      return res.status(401).json({ // need to return to stop execution
+        title: 'User not authorized',
+        error: {message: 'Message created by other user'}
+      });
+    }
     doc.content = req.body.content;
     doc.save( function (err, result) {
       if (err) { // Mongoose is smart enough to know to update the already existing object
@@ -102,6 +113,9 @@ router.patch('/:id', function(req, res, next) {
 })
 
 router.delete('/:id', function(req, res,next){
+  // Find user from payload
+  var decoded = jwt.decode(req.query.token);
+
   Message.findById(req.params.id, function(err, doc) {
     if (err) {
       return res.status(404).json({ // need to return to stop execution
@@ -117,6 +131,13 @@ router.delete('/:id', function(req, res,next){
     }
 
     // success finding mesage
+    if (doc.user != decoded.user._id) { // doc.user is just the id
+      return res.status(401).json({ // need to return to stop execution
+        title: 'User not authorized',
+        error: {message: 'Message created by other user'}
+      });
+    }
+
     doc.content = req.body.content;
     doc.remove( function (err, result) {
       if (err) { // Mongoose is smart enough to know to update the already existing object
