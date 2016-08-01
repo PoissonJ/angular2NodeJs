@@ -3,6 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var Message = require('../models/message');
+var User = require('../models/user');
 
 router.get('/', function(req, res, next) {
   Message.find()
@@ -34,19 +35,36 @@ router.use('/', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-  var message = new Message({
-    content: req.body.content
-  });
-  message.save(function(err, result) {
+  // Find user from payload
+  var decoded = jwt.decode(req.query.token);
+  User.findById(decoded.user._id, function(err, doc) {
     if (err) {
       return res.status(404).json({ // need to return to stop execution
         title: 'An error occurred',
         error: err // contains a message inside of the err object
       });
     }
-    res.status(201).json({ // don't need to return beause there is no code after it
-      message: 'Saved message',
-      obj: result
+
+    var message = new Message({
+      content: req.body.content,
+      user: doc // User object from the database
+    });
+    message.save(function(err, result) {
+      if (err) {
+        return res.status(404).json({ // need to return to stop execution
+          title: 'An error occurred',
+          error: err // contains a message inside of the err object
+        });
+      }
+
+      // Add message to user's message array
+      doc.messages.push(doc)
+      doc.save(); // Update user
+
+      res.status(201).json({ // don't need to return beause there is no code after it
+        message: 'Saved message',
+        obj: result
+      });
     });
   });
 });
