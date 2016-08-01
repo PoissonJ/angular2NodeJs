@@ -1,5 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
+import {Router} from "@angular/router";
+
+import { User } from "./user";
+import { AuthService } from "./auth.service";
 
 @Component({
   moduleId: module.id,
@@ -10,10 +14,19 @@ import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormContro
 export class SigninComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService, private _router: Router) { }
 
   onSubmit() {
-    console.log(this.myForm.value);
+    const user = new User(this.myForm.value.email, this.myForm.value.password);
+    this._authService.signin(user)
+      .subscribe(
+        data => {
+          localStorage.setItem('token', data.obj);
+          localStorage.setItem('userId', data.userId);
+          this._router.navigateByUrl('/');
+        },
+        error => console.error(error)
+      );
   }
 
   ngOnInit() {
