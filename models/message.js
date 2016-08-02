@@ -8,7 +8,8 @@ var schema = new Schema({
 });
 
 // Middleware after remove command is called
-// Removes the message from the user after the message is deleted
+// Removes the message from the user after the message is deleted.
+// This is the opsite from schema.pre()
 schema.post('remove', function(doc) { // doc is the object that is removed
   var deletedMessage = doc;
   User.findById(doc.user, function(err, doc) {

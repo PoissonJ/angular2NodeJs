@@ -8,7 +8,7 @@ var User = require('../models/user');
 router.get('/', function(req, res, next) {
   Message.find()
     // Add user object
-    .populate('user', 'firstname') // Only retrieve the users first name
+    .populate('user', 'firstName') // Only retrieve the users first name
     .exec(function(err, docs) {// Dont execure the find query immediatlet, instead exec all queries
       if (err) {
         return res.status(404).json({
@@ -60,7 +60,7 @@ router.post('/', function(req, res, next) {
       }
 
       // Add message to user's message array
-      doc.messages.push(doc)
+      doc.messages.push(result)
       doc.save(); // Update user
 
       res.status(201).json({ // don't need to return beause there is no code after it
