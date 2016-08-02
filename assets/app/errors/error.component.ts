@@ -16,8 +16,7 @@ import { ErrorService } from "./error.service";
         width: 100%;
         height: 100vh;
     }
-  `],
-  providers: [ErrorService]
+  `]
 })
 export class ErrorComponent implements OnInit {
   errorDisplay = 'none';

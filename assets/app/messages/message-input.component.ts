@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 
 import { Message } from './message';
 import { MessageService } from './message.service';
+import {ErrorService} from "../errors/error.service";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ export class MessageInputComponent implements OnInit {
   active: boolean = true;
 
   // Get instance of mesage service
-  constructor(private _messageService: MessageService) { }
+  constructor(private _messageService: MessageService, private _errorService: ErrorService) { }
 
   onSubmit() {
     if (this.showCancelButton) { // Edit a message
@@ -28,7 +29,7 @@ export class MessageInputComponent implements OnInit {
       this._messageService.updateMessage(this.model)
         .subscribe(
           data => console.log(data),
-          error => console.log(error)
+          error => this._errorService.handleError(error)
         );
 
       this.model = new Message("");
@@ -40,7 +41,7 @@ export class MessageInputComponent implements OnInit {
           data => {
             this._messageService.messages.push(data); // Update angulars message service to stay in sync
           },
-          error => console.log(JSON.stringify(error))
+          error => this._errorService.handleError(error)
         );
 
       this.model = new Message("");

@@ -3,6 +3,7 @@ import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, FormContro
 
 import { User } from "./user";
 import { AuthService } from "./auth.service";
+import { ErrorService } from "../errors/error.service";
 @Component({
   moduleId: module.id, // necessary when using tsconfig "commonjs" for file path resolution
   selector: 'my-signup',
@@ -12,7 +13,7 @@ import { AuthService } from "./auth.service";
 export class SignupComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService, private _errorService: ErrorService) { }
 
   onSubmit() {
     console.log(JSON.stringify(this.myForm.value));
@@ -26,7 +27,7 @@ export class SignupComponent implements OnInit {
     this._authService.signup(user)
       .subscribe(
         data => console.log(data), // remove for production
-        error => console.error(error)
+        error => this._errorService.handleError(error)
       )
   }
 

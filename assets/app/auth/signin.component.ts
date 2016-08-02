@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 
 import { User } from "./user";
 import { AuthService } from "./auth.service";
+import { ErrorService } from "../errors/error.service";
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,8 @@ import { AuthService } from "./auth.service";
 export class SigninComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService, private _router: Router) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService,
+    private _router: Router, private _errorService: ErrorService) { }
 
   onSubmit() {
     const user = new User(this.myForm.value.email, this.myForm.value.password);
@@ -25,7 +27,7 @@ export class SigninComponent implements OnInit {
           localStorage.setItem('userId', data.userId);
           this._router.navigateByUrl('/');
         },
-        error => console.error(error)
+        error => this._errorService.handleError(error)
       );
   }
 
